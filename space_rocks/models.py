@@ -26,8 +26,10 @@ class GameObject:
 class Spaceship(GameObject):
     MANEUVERABILITY = 3 #determines how fast sprite can rotate
     ACCELERATION = 0.25
+    BULLET_SPEED = 3
 
-    def __init__(self, position):
+    def __init__(self, position, create_bullet_callback):
+        self.create_bullet_callback = create_bullet_callback
         self.direction = Vector2(UP) #copy of original UP vector
 
         super().__init__(position, load_sprite("spaceship"), Vector2(0))
@@ -39,6 +41,11 @@ class Spaceship(GameObject):
     
     def accelerate(self):
         self.velocity += self.direction * self.ACCELERATION
+    
+    def shoot(self):
+        bullet_velocity = self.direction * self.BULLET_SPEED + self.velocity
+        bullet = Bullet(self.position, bullet_velocity)
+        self.create_bullet_callback(bullet)
 
     def draw(self, surface):
         angle = self.direction.angle_to(UP) #calculates angle by which one vector needs to be rotated to point in same direction as other vector
@@ -51,4 +58,11 @@ class Asteroid(GameObject):
     def __init__(self, position):
         super().__init__(
             position, load_sprite("asteroid"), get_random_velocity(1, 3))
+
+class Bullet(GameObject):
+    def __init__(self, position, velocity):
+        super().__init__(position, load_sprite("bullet"), velocity)
+    
+    def move(self, surface):
+        self.position = self.position + self.velocity
     
