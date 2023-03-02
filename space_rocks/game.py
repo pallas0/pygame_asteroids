@@ -1,7 +1,7 @@
 import pygame
 
 from models import Spaceship, Asteroid
-from utils import load_sprite
+from utils import load_sprite, get_random_position
 
 class SpaceRocks:
     def __init__(self):
@@ -10,7 +10,9 @@ class SpaceRocks:
         self.background = load_sprite("space", False)
         self.clock = pygame.time.Clock() #allows for setting FPS
 
-        self.asteroids = [Asteroid((0, 0)) for _ in range(6)]
+        self.asteroids = [
+            Asteroid(get_random_position(self.screen)) for _ in range(6)
+            ]
         self.spaceship = Spaceship((400, 300))
 
     def _get_game_objects(self):
