@@ -30,5 +30,5 @@ class SpaceRocks:
         pass
 
     def _draw(self):
-        self.screen.fill((0, 0, 255))
-        pygame.display.flip() #updates the content of screen
+        self.screen.blit(self.background, (0,0))
+        pygame.display.flip()
