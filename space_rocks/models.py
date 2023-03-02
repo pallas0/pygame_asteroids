@@ -15,12 +15,13 @@ class GameObject:
         blit_position = self.position - Vector2(self.radius) #Vector2 will use this number for both values
         surface.blit(self.sprite, blit_position)
     
-    def move(self):
-        self.position = self.position + self.velocity
+    def move(self, surface):
+        self.position = wrap_position(self.position + self.velocity, surface)
     
     def collides_with(self, other_obj):
         distance = self.position.distance_to(other_obj.position)
         return distance < self.radius + other_obj.radius
+    
     
 class Spaceship(GameObject):
     MANEUVERABILITY = 3 #determines how fast sprite can rotate
