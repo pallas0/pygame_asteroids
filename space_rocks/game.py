@@ -23,7 +23,7 @@ class SpaceRocks:
                     > self.MIN_ASTEROID_DISTANCE
                 ):
                     break
-            self.asteroids.append(Asteroid(position))
+            self.asteroids.append(Asteroid(position, self.asteroids.append))
 
     def _get_game_objects(self):
         game_objects = [*self.asteroids, *self.bullets]
@@ -82,7 +82,7 @@ class SpaceRocks:
                 if asteroid.collides_with(bullet):
                     self.asteroids.remove(asteroid)
                     self.bullets.remove(bullet)
-                    break
+                    asteroid.split()
         
         for bullet in self.bullets[:]:
             if not self.screen.get_rect().collidepoint(bullet.position):
