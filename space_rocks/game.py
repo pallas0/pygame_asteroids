@@ -5,11 +5,14 @@ from utils import load_sprite, get_random_position
 
 class SpaceRocks:
     MIN_ASTEROID_DISTANCE = 250
+    show_debug = True
     def __init__(self):
         self._init_pygame()
         self.screen = pygame.display.set_mode((800, 600))
         self.background = load_sprite("space", False)
         self.clock = pygame.time.Clock() #allows for setting FPS
+        self.debug_surface = pygame.Surface((200, 100))
+        self.debug_surface.fill((255, 255, 255))
 
         self.asteroids = []
         self.bullets = []
@@ -80,6 +83,10 @@ class SpaceRocks:
 
         if is_key_pressed[pygame.K_r]:
             self.reset_game()
+        
+        if is_key_pressed[pygame.K_d]:
+            self.show_debug = not self.show_debug
+
 
     def _process_game_logic(self):
         for game_object in self._get_game_objects():
@@ -108,6 +115,9 @@ class SpaceRocks:
 
         for game_object in self._get_game_objects():
             game_object.draw(self.screen)
+
+        if self.show_debug:
+            self.screen.blit(self.debug_surface, (600, 0))
 
 
         pygame.display.flip()
