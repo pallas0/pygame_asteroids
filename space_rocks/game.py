@@ -15,6 +15,17 @@ class SpaceRocks:
         self.bullets = []
         self.spaceship = Spaceship((400, 300), self.bullets.append)
 
+        self.asteroids_gen()
+
+    
+    def reset_game(self):
+        self.asteroids = []
+        self.bullets = []
+        self.spaceship = Spaceship((400, 300), self.bullets.append)
+
+        self.asteroids_gen()
+
+    def asteroids_gen(self):
         for _ in range(6):
             while True:
                 position = get_random_position(self.screen)
@@ -67,6 +78,9 @@ class SpaceRocks:
             if is_key_pressed[pygame.K_UP]:
                 self.spaceship.accelerate()
 
+        if is_key_pressed[pygame.K_r]:
+            self.reset_game()
+
     def _process_game_logic(self):
         for game_object in self._get_game_objects():
             game_object.move(self.screen)
@@ -83,6 +97,7 @@ class SpaceRocks:
                     self.asteroids.remove(asteroid)
                     self.bullets.remove(bullet)
                     asteroid.split()
+                    break
         
         for bullet in self.bullets[:]:
             if not self.screen.get_rect().collidepoint(bullet.position):
