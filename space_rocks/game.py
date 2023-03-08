@@ -5,7 +5,7 @@ from utils import load_sprite, get_random_position
 
 class SpaceRocks:
     MIN_ASTEROID_DISTANCE = 250
-    show_debug = True
+    show_debug = False
     def __init__(self):
         self._init_pygame()
         self.screen = pygame.display.set_mode((800, 600))
