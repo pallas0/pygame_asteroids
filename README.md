@@ -3,6 +3,10 @@
 
 This is a Pygame version of the classic game Asteroids, where you control a spaceship and shoot asteroids with bullets.
 
+## Gameplay Screenshot
+<img width="796" alt="Screenshot 2023-05-26 at 4 13 06 PM" src="https://github.com/pallas0/pygame_asteroids/assets/52135849/e18dae44-7eb3-4ed4-8123-e33ea646cd65">
+
+
 ## Installation
 
 1. Clone the repository: `git clone https://github.com/YOUR-USERNAME/pygame-asteroids.git`
